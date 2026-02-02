@@ -296,8 +296,9 @@ body {
     /* Buffer to prevent accidental closing when moving moose */
 }
 
-/* REVEAL LOGIC: Open if hovering the item wrapper */
-.project-item:hover .project-card {
+/* REVEAL LOGIC: Open if hovering the item wrapper or active on mobile */
+.project-item:hover .project-card,
+.project-item.active-mobile .project-card {
     opacity: 1;
     transform: translateY(0);
     max-height: 1000px;

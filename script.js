@@ -32,11 +32,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Observe project card
+    // Observe project card for fade-in
     const projectCard = document.querySelector('.project-card');
     if (projectCard) {
         observer.observe(projectCard);
     }
+
+    // --- MOBILE PROJECT INTERACTION ---
+    const projectItems = document.querySelectorAll('.project-item');
+
+    // Auto-reveal on scroll for mobile
+    const projectRevealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (window.innerWidth <= 768) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active-mobile');
+                } else {
+                    entry.target.classList.remove('active-mobile');
+                }
+            }
+        });
+    }, { threshold: 0.6 });
+
+    projectItems.forEach(item => {
+        projectRevealObserver.observe(item);
+
+        // Touch interaction for immediate feedback
+        item.addEventListener('touchstart', () => {
+            if (window.innerWidth <= 768) {
+                item.classList.add('active-mobile');
+            }
+        }, { passive: true });
+    });
+
+    // Close when touching outside
+    document.addEventListener('touchstart', (e) => {
+        if (!e.target.closest('.project-item')) {
+            projectItems.forEach(item => item.classList.remove('active-mobile'));
+        }
+    }, { passive: true });
+    // ----------------------------------
 
     // Add typing effect to status text
     const statusText = document.querySelector('.status-text');
