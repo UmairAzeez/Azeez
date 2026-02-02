@@ -1,11 +1,8 @@
 // Configuration for admin dashboard
 // This allows the admin to connect to the main site's API
 
-// For local development, use relative URLs
-// For production, set MAIN_SITE_URL environment variable in Netlify
-const MAIN_SITE_URL = window.location.hostname === 'localhost'
-    ? ''
-    : (window.ENV?.MAIN_SITE_URL || '');
+// For single-site deployment, always use relative URLs
+const MAIN_SITE_URL = '';
 
 // API endpoints
 const API_ENDPOINTS = {
