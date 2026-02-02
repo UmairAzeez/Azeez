@@ -335,14 +335,39 @@ function initChatWidget() {
 
     // EXPOSED METHODS
     window.openChat = () => {
+        // Refresh session state in case it was set by contact.js
+        sessionId = localStorage.getItem('chat_session_id');
+        userName = localStorage.getItem('chat_user_name');
+
+        if (sessionId && userName) {
+            startScreen.classList.add('hidden');
+            enableChat();
+            pollMessages(); // Trigger immediate fetch
+        }
+
         isOpen = true;
         chatWindow.classList.add('open');
-        toggleBtn.classList.add('visible'); // Ensure visible if opened manually
-        if (sessionId) scrollToBottom();
-        else document.getElementById('chat-name-input').focus();
+        toggleBtn.classList.add('visible');
+
+        if (sessionId) {
+            scrollToBottom();
+            fetchChatHistory(); // One-off immediate fetch
+        } else {
+            const nameInput = document.getElementById('chat-name-input');
+            if (nameInput) nameInput.focus();
+        }
     };
 
     window.showChatButton = () => {
+        // Just in case we need to sync session state when form is submitted
+        sessionId = localStorage.getItem('chat_session_id');
+        userName = localStorage.getItem('chat_user_name');
+
+        if (sessionId && userName) {
+            startScreen.classList.add('hidden');
+            enableChat();
+        }
+
         toggleBtn.classList.add('visible');
     };
 }
