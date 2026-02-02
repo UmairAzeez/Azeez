@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umair Aziz | Trader & Developer</title>
+    <meta name="description"
+        content="Portfolio of Umair Aziz - Student, Trader, and Developer specializing in algorithmic trading systems and market analysis.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chat-widget.css">
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-label">— SYSTEM.INITIALIZE()</div>
+            <div id="thunder-clouds" class="thunder-clouds"></div>
+            <h1 class="hero-title">
+                Umair Aziz
+                <span class="hero-subtitle">Student / Trader</span>
+            </h1>
+            <p class="hero-description">
+                Market analyst specializing in crypto and Euro.<br>
+                Building systems for getting money.
+            </p>
+            <div class="hero-cta">
+                <a href="javascript:void(0)" onclick="openChat()" class="btn-primary">Contact</a>
+            </div>
+        </div>
+        <div class="hero-bg"></div>
+    </section>
+
+    <!-- Project Section -->
+    <section id="project" class="project">
+        <div class="container">
+            <div class="project-item">
+                <div class="section-header">
+                    <span class="section-label">— CURRENTLY DEVELOPING </span>
+                    <h2 class="section-title">Umar</h2>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-status">
+                        <span class="status-text-bold">COMING SOON</span>
+                    </div>
+
+                    <div class="project-content">
+                        <div class="project-info">
+                            <h3 class="project-name">Memecoin Trading & Social Bot</h3>
+                            <p class="project-description">
+                                An autonomous bot sharing it's trading journey.
+                            </p>
+
+                            <div style="text-align: center; width: 100%; margin-top: 2rem;">
+                                <a href="https://github.com" target="_blank" class="btn-waitlist">
+                                    <span>GITHUB</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="contact-title">Let's Connect</h2>
+
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required maxlength="100"
+                            class="form-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" required maxlength="2000"
+                            rows="6" class="form-input"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary form-submit">
+                        <span class="submit-text">Send Message</span>
+                        <span class="submit-loading" style="display: none;">Sending...</span>
+                    </button>
+
+                    <div id="form-feedback" class="form-feedback"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Umair Aziz. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="contact.js"></script>
+    <script src="chat-widget.js"></script>
+</body>
+
+</html>

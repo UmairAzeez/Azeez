@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Message Inbox</h1>
+            <button id="logout-btn" class="btn-secondary">Logout</button>
+        </header>
+
+        <div class="dashboard-content">
+            <!-- Sidebar: Session List -->
+            <aside class="session-sidebar">
+                <div class="sidebar-header">
+                    <h2>Active Chats</h2>
+                    <div class="refresh-indicator" id="refresh-indicator">Wait...</div>
+                </div>
+                <div id="session-list" class="session-list">
+                    <!-- Session items will go here -->
+                    <div class="loading">Loading sessions...</div>
+                </div>
+            </aside>
+
+            <!-- Main: Chat Area -->
+            <main class="chat-main">
+                <div id="no-chat-selected" class="no-chat-selected">
+                    <p>Select a conversation to start chatting</p>
+                </div>
+
+                <div id="active-chat-container" class="active-chat-container" style="display: none;">
+                    <div class="chat-main-header">
+                        <h2 id="active-chat-name">User Name</h2>
+                        <span id="active-chat-id" class="chat-id-label">Session ID</span>
+                    </div>
+
+                    <div id="admin-chat-messages" class="admin-chat-messages">
+                        <!-- Messages go here -->
+                    </div>
+
+                    <form id="admin-reply-form" class="admin-reply-form">
+                        <input type="text" id="admin-reply-input" class="admin-reply-input"
+                            placeholder="Type a reply..." autocomplete="off">
+                        <button type="submit" class="btn-primary">Send</button>
+                        <div class="form-feedback"></div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="env.js"></script>
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

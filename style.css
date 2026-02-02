@@ -1,0 +1,598 @@
+/* ===================================
+   CSS VARIABLES & RESET
+   =================================== */
+:root {
+    --bg-primary: #050505;
+    --bg-secondary: #0a0a0a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent-red: #ff2a2a;
+    --accent-red-glow: rgba(255, 42, 42, 0.3);
+    --border-color: #1a1a1a;
+
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ===================================
+   HERO SECTION
+   =================================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(255, 42, 42, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 42, 42, 0.05) 0%, transparent 50%);
+    z-index: 0;
+    animation: bgPulse 8s ease-in-out infinite;
+}
+
+@keyframes bgPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 900px;
+    padding: 2rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--accent-red);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    animation: fadeIn 1s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    animation: fadeIn 1s ease-out 0.4s both;
+    z-index: 2;
+    /* Ensure title is on top */
+}
+
+.thunder-clouds {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1400px;
+    height: 600px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.8;
+    /* Soften edges to prevent hard cut-off lines */
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+}
+
+.hero-subtitle {
+    display: block;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: var(--transition-smooth);
+    pointer-events: none;
+}
+
+.hero-title:hover .hero-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    line-height: 1.8;
+    font-weight: 300;
+    animation: fadeIn 1s ease-out 0.6s both;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease-out 0.8s both;
+}
+
+.hero-cta a {
+    min-width: 200px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 1rem 2.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--accent-red);
+    color: var(--text-primary);
+    box-shadow: 0 0 20px var(--accent-red-glow);
+}
+
+.btn-primary:hover {
+    background-color: #ff4444;
+    box-shadow: 0 0 30px rgba(255, 42, 42, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-red);
+    color: var(--accent-red);
+    transform: translateY(-2px);
+}
+
+/* ===================================
+   PROJECT SECTION
+   =================================== */
+/* ===================================
+   PROJECT SECTION
+   =================================== */
+.project {
+    padding: 8rem 0;
+    /* Seamless continuation from Hero - Force exact same bg base */
+    background-color: var(--bg-primary);
+    background: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-primary) 100%);
+    position: relative;
+    padding-bottom: 4rem;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--accent-red);
+    font-weight: 600;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.section-title:hover {
+    color: var(--accent-red);
+    text-shadow: 0 0 30px var(--accent-red-glow);
+}
+
+.project-card {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.4), rgba(10, 10, 10, 0.6));
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 3rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.5s ease-out;
+    /* Smooth open/close */
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 0;
+    pointer-events: none;
+    /* Ignore clicks when hidden */
+    visibility: hidden;
+    /* Ensure purely hidden */
+}
+
+.project-item {
+    position: relative;
+    padding-bottom: 2rem;
+    /* Buffer to prevent accidental closing when moving moose */
+}
+
+/* REVEAL LOGIC: Open if hovering the item wrapper */
+.project-item:hover .project-card {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 1000px;
+    margin-top: 1rem;
+    pointer-events: auto;
+    visibility: visible;
+    padding: 3rem;
+}
+
+/* Hidden state cleanup */
+.project-item:not(:hover) .project-card {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 0;
+}
+
+.project-card:hover {
+    border: 1px solid var(--accent-red);
+    box-shadow: 0 0 40px var(--accent-red-glow);
+}
+
+.project-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    height: 100%;
+    /* Take full height if container allows or specify min-height */
+    min-height: 200px;
+    /* Ensure vertical centering space */
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--accent-red);
+}
+
+.status-text-bold {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: var(--accent-red);
+    text-align: center;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-red);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 8px var(--accent-red);
+    }
+
+    50% {
+        opacity: 0.5;
+        box-shadow: 0 0 20px var(--accent-red);
+    }
+}
+
+.project-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Elements removed by user request (Features, Tags, Code Preview) */
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    /* Center content since image is gone */
+    text-align: center;
+}
+
+.project-name {
+    font-size: clamp(2rem, 4vw, 3rem);
+    /* Slightly larger */
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.project-description {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.btn-waitlist {
+    margin-top: 1.5rem;
+    padding: 1rem 3rem;
+    background-color: transparent;
+    color: var(--accent-red);
+    border: 1px solid var(--accent-red);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    /* Now clickable */
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    /* For anchor tag usage */
+    display: inline-block;
+}
+
+.btn-waitlist:hover {
+    background-color: rgba(255, 42, 42, 0.1);
+    box-shadow: 0 0 30px var(--accent-red-glow);
+    transform: translateY(-2px);
+}
+
+/* ===================================
+   CONTACT SECTION
+   =================================== */
+/* ===================================
+   CONTACT SECTION
+   =================================== */
+.contact {
+    padding: 8rem 0;
+    /* Start from primary (black) to blend with Project section above */
+    background: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.contact-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.contact-email {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--accent-red);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    display: inline-block;
+}
+
+.contact-email:hover {
+    color: #ff4444;
+    transform: translateY(-2px);
+    text-shadow: 0 0 20px var(--accent-red-glow);
+}
+
+/* Contact Form */
+.contact-form {
+    max-width: 500px;
+    margin: 2rem auto 0;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    transition: var(--transition-smooth);
+    resize: vertical;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--accent-red);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 20px var(--accent-red-glow);
+}
+
+.form-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.form-submit {
+    width: 100%;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 600;
+    display: none;
+}
+
+.form-feedback.success {
+    display: block;
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    color: #00ff00;
+}
+
+.form-feedback.error {
+    display: block;
+    background-color: rgba(255, 42, 42, 0.1);
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red);
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+.footer {
+    padding: 2rem 0;
+    background-color: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.footer p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .project {
+        padding: 4rem 0;
+    }
+
+    .project-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .project-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact {
+        padding: 4rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .project-card {
+        padding: 1.5rem;
+    }
+
+    .code-preview {
+        font-size: 0.75rem;
+    }
+}
