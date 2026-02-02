@@ -198,9 +198,9 @@ function initChatWidget() {
 
         // Notification if closed
         if (!isOpen && messages.length > currentCount) {
-            // Only if last message is admin
+            // Only if last message is manager
             const lastMsg = messages[messages.length - 1];
-            if (lastMsg.sender_type === 'admin') {
+            if (lastMsg.sender_type === 'manager') {
                 badge.classList.add('active');
             }
         }
