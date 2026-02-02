@@ -1,5 +1,5 @@
 
-// Admin Dashboard - Chat System
+// manager Dashboard - Chat System
 const CHAT_API = {
     getMessages: window.API_CONFIG?.endpoints?.getMessages || '/.netlify/functions/get-messages',
     reply: window.API_CONFIG?.endpoints?.reply || '/.netlify/functions/reply'
@@ -9,7 +9,7 @@ const CHAT_API = {
 let sessions = {};
 let currentSessionId = null;
 let pollInterval = null;
-let authToken = localStorage.getItem('adminToken');
+let authToken = localStorage.getItem('managerToken');
 
 // Immediate redirect if no token
 if (!authToken && !window.location.pathname.includes('index.html')) {
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
             console.log('Logging out...');
-            localStorage.removeItem('adminToken');
+            localStorage.removeItem('managerToken');
             window.location.href = 'index.html';
         });
     }
@@ -42,9 +42,9 @@ function initDashboard() {
     // Chat Elements
     const activeChatName = document.getElementById('active-chat-name');
     const activeChatId = document.getElementById('active-chat-id');
-    const chatMessagesEl = document.getElementById('admin-chat-messages');
-    const replyForm = document.getElementById('admin-reply-form');
-    const replyInput = document.getElementById('admin-reply-input');
+    const chatMessagesEl = document.getElementById('manager-chat-messages');
+    const replyForm = document.getElementById('manager-reply-form');
+    const replyInput = document.getElementById('manager-reply-input');
 
     if (!sessionListEl || !activeChatContainer) {
         console.error('Core dashboard elements missing!');
@@ -66,7 +66,7 @@ function initDashboard() {
 
             if (response.status === 401) {
                 console.warn('Unauthorized. Redirecting to login.');
-                localStorage.removeItem('adminToken');
+                localStorage.removeItem('managerToken');
                 window.location.href = 'index.html';
                 return;
             }
@@ -152,7 +152,7 @@ function initDashboard() {
             const unreadBadge = session.unreadCount > 0 ? `<span class="badge">${session.unreadCount}</span>` : '';
             const time = new Date(session.lastMessage?.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             const preview = session.lastMessage?.content || '(No message content)';
-            const prefix = session.lastMessage?.sender_type === 'admin' ? 'You: ' : '';
+            const prefix = session.lastMessage?.sender_type === 'manager' ? 'You: ' : '';
 
             return `
                 <div class="session-item ${isActive} ${isUnread}" onclick="selectSession('${session.id}')">

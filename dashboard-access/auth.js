@@ -1,17 +1,17 @@
-// Admin authentication
+// manager authentication
 // API URL is now configured in config.js
-const getApiUrl = () => window.API_CONFIG?.endpoints?.login || '/.netlify/functions/admin-login';
+const getApiUrl = () => window.API_CONFIG?.endpoints?.login || '/.netlify/functions/manager-login';
 
 // Check if already logged in
 if (window.location.pathname.includes('dashboard.html')) {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('managerToken');
     if (!token) {
         window.location.href = 'index.html';
     }
 } else if (window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/')) {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('managerToken');
     if (token) {
-        window.location.href = '/admin/dashboard.html';
+        window.location.href = '/dashboard-access/dashboard.html';
     }
 }
 
@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 // Store token
-                localStorage.setItem('adminToken', data.token);
+                localStorage.setItem('managerToken', data.token);
                 // Redirect to dashboard
-                window.location.href = '/admin/dashboard.html';
+                window.location.href = '/dashboard-access/dashboard.html';
             } else {
                 showFeedback(data.error || 'Invalid credentials', 'error');
             }
@@ -80,6 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Logout function
 function logout() {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem('managerToken');
     window.location.href = 'index.html';
 }
