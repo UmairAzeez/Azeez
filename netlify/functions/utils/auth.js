@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 function verifyToken(token) {
     try {
         const decoded = jwt.verify(token, process.env['JWT' + '_SECRET']);
-        return { valid: true, admin: decoded.admin };
+        return { valid: true, manager: decoded.manager };
     } catch (err) {
         return { valid: false, error: 'Invalid or expired token' };
     }

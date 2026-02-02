@@ -68,10 +68,10 @@ exports.handler = async (event) => {
             .from('messages')
             .insert([{
                 session_id,
-                name: 'Umair (Admin)',
+                name: 'Umair (manager)',
                 content: reply.trim(),
-                sender_type: 'admin',
-                is_read: true // Admin reading their own message
+                sender_type: 'manager',
+                is_read: true // manager reading their own message
             }])
             .select();
 

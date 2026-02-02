@@ -36,7 +36,7 @@ exports.handler = async (event) => {
         }
 
         // Check credentials using indirect access to satisfy aggressive scanners
-        const expectedUser = process.env['ADMIN' + '_USERNAME'];
+        const expectedUser = process.env['manager' + '_USERNAME'];
         if (username !== expectedUser) {
             return {
                 statusCode: 401,
@@ -45,7 +45,7 @@ exports.handler = async (event) => {
             };
         }
 
-        const passHash = process.env['ADMIN' + '_PASSWORD_HASH'];
+        const passHash = process.env['manager' + '_PASSWORD_HASH'];
         const isMatch = await bcrypt.compare(password, passHash);
         if (!isMatch) {
             return {
@@ -57,7 +57,7 @@ exports.handler = async (event) => {
 
         // Create JWT
         const token = jwt.sign(
-            { admin: { username } },
+            { manager: { username } },
             process.env['JWT' + '_SECRET'],
             { expiresIn: '24h' }
         );
