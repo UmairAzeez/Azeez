@@ -1,11 +1,11 @@
 const { supabase } = require('./utils/supabase');
-const { rateLimit } = require('./utils/rateLimit');
+const { verifyToken, extractToken } = require('./utils/auth');
 
 exports.handler = async (event) => {
     // CORS headers
     const headers = {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         'Access-Control-Allow-Methods': 'POST, OPTIONS'
     };
 
@@ -24,23 +24,27 @@ exports.handler = async (event) => {
     }
 
     try {
-        // Rate limiting
-        const ip = event.headers['x-forwarded-for'] || event.headers['client-ip'] || 'unknown';
-        const rateLimitResult = rateLimit(ip);
-
-        if (!rateLimitResult.allowed) {
+        // Verify JWT
+        const token = extractToken(event.headers);
+        if (!token) {
             return {
-                statusCode: 429,
+                statusCode: 401,
                 headers,
-                body: JSON.stringify({
-                    error: 'Too many messages sent. Please try again later.',
-                    retryAfter: rateLimitResult.retryAfter
-                })
+                body: JSON.stringify({ error: 'No token provided' })
+            };
+        }
+
+        const { valid, error: authError } = verifyToken(token);
+        if (!valid) {
+            return {
+                statusCode: 401,
+                headers,
+                body: JSON.stringify({ error: authError || 'Invalid token' })
             };
         }
 
         // Parse body
-        const { session_id, name, content } = JSON.parse(event.body);
+        const { session_id, content } = JSON.parse(event.body);
 
         // Validate input
         if (!session_id || !content) {
@@ -59,14 +63,14 @@ exports.handler = async (event) => {
             };
         }
 
-        // Insert into database
+        // Insert manager message
         const { data, error } = await supabase
             .from('chat_messages')
             .insert([{
                 session_id,
-                name: name ? name.trim() : 'Anonymous',
+                name: 'Manager',
                 content: content.trim(),
-                sender_type: 'user'
+                sender_type: 'manager'
             }])
             .select();
 
@@ -75,7 +79,7 @@ exports.handler = async (event) => {
             return {
                 statusCode: 500,
                 headers,
-                body: JSON.stringify({ error: 'Failed to save message' })
+                body: JSON.stringify({ error: 'Failed to send message' })
             };
         }
 

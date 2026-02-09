@@ -26,7 +26,7 @@ exports.handler = async (event) => {
 
         // Fetch messages for this session
         const { data, error } = await supabase
-            .from('messages')
+            .from('chat_messages')
             .select('*')
             .eq('session_id', session_id)
             .order('created_at', { ascending: true }); // Oldest first for chat history
